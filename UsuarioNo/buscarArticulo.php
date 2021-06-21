@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title></title>
+
+</head>
+
+<body>
+
+
+
+
+    <div id="navegacion" class="d-flex mb-3 ">
+        <div class="p-2 "><a id="Link1" class="navbar-brand " href="inicio.php">
+                <h5>Tecno-Bookly</h5>
+            </a></div>
+
+
+            
+        <div class="p-2 ">
+            <a id="Link2" class="nav-link" href="ListaArticulos.php">
+                <h6>Articulos</h6>
+            </a>
+        </div>
+        <div class="p-2 mr-auto  ">
+
+<form class="form-inline" action="buscarArticulo.php">
+<input class="form-control mr-sm-2" type="text" placeholder="Buscar Articulos">
+<button class="btn btn-success" type="submit">Search</button>
+</form>
+
+</div>
+
+
+       
+
+<?php 
+
+session_start();
+
+if(isset($_SESSION['ID2'])){
+    $id= $_SESSION['ID2'];
+
+    $servidor="localhost";
+    $rol1="admin";
+    $usuarioBD="root";
+    $pwBD="";
+    $nomBD="examenu5";
+    $db= mysqli_connect($servidor,$usuarioBD,$pwBD,$nomBD);
+    
+   //Terminar el query falta el enlace con el id 
+    $consulta="SELECT nombre FROM personas WHERE id='$id'";
+$resultado = mysqli_query($db, $consulta);
+
+if(mysqli_num_rows($resultado)===1){
+        
+    $row= mysqli_fetch_assoc($resultado);
+
+    $nombre=$row['nombre'];
+    
+   
+
+                ?>
+    <div class="p-2 ml-auto ">
+
+        <a id="Link3" class="nav-link" href="ajustes.php">
+            <h6><?php echo $nombre;?></h6>
+
+        </a>
+
+    </div>
+    <?php }} ?>
+        <div class="p-2 ">
+
+            <a id="Link3" class="nav-link" href="http://localhost/ExamenU5/inicio.php">
+                <h6>Cerrar Session</h6>
+
+            </a>
+
+        </div>
+    </div>
+
+    <h1>Aqui van las busquedas por nombre de articulo</h1>
+
+   
+
+         
+
+
+
+
+
+</body>
+
+</html>
